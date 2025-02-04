@@ -1,0 +1,6 @@
+{
+    "url": "https://api.datacite.org/dois",
+    "doiPrefix": "10.12345",
+    "username": "your_username",
+    "password": "your_password"
+}
