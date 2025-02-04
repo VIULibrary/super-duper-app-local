@@ -14,14 +14,11 @@ into one flet GUI app
 
 todo: 
 
-add and test csv-merger-2
-x paginate
-run and test on test account 
-    complex test like Sturgeons
-run and test in production account
-bundle into a docker app
-deploy from server
 
+screenshot
+link to demo
+
+documentation: 
 
 REQUIREMENTS
 USAGE
