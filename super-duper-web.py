@@ -285,7 +285,7 @@ def page2(page: ft.Page):
         dspace_csv,
         ft.ElevatedButton(
             "Select DSpace Export CSV",
-            on_click=lambda _: pick_dspace_file_picker.pick_files(allow_multiple=False)
+            on_click=lambda _: pick_dspace_file_picker.pick_files(allow_multiple=False,allowed_extensions=["csv"])
         ),
         # Add space above Output Filename
         ft.Container(height=10),
@@ -568,7 +568,7 @@ def page3(page: ft.Page):
         spacer,
         ft.Column(
             [
-                ft.ElevatedButton("Upload Credentials File", on_click=lambda _: credentials_picker.pick_files(allow_multiple=False)),
+                ft.ElevatedButton("Upload Credentials File", on_click=lambda _: credentials_picker.pick_files(allow_multiple=False, allowed_extensions=["json"])),
                 url_input,
                 doi_prefix_input,
                 username_input,
@@ -579,7 +579,7 @@ def page3(page: ft.Page):
         ft.Column(
             [
                 ft.Row([
-                    ft.ElevatedButton("Select Input CSV", on_click=lambda _: input_csv_picker.pick_files(allow_multiple=False)),
+                    ft.ElevatedButton("Select Input CSV", on_click=lambda _: input_csv_picker.pick_files(allow_multiple=False, allowed_extensions=["csv"])),
                     input_csv
                 ]),
                 # Add spacing before output_filename
@@ -738,9 +738,9 @@ def page4(page: ft.Page):
         description,
         spacer,
         auto_prefix_csv,
-        ft.ElevatedButton("Select Datacite DOI Export CSV", on_click=lambda _: pick_auto_prefix_file_picker.pick_files(allow_multiple=False)),
+        ft.ElevatedButton("Select Datacite DOI Export CSV", on_click=lambda _: pick_auto_prefix_file_picker.pick_files(allow_multiple=False, allowed_extensions=["csv"])),
         dspace_csv,
-        ft.ElevatedButton("Select DSpace Import CSV", on_click=lambda _: pick_dspace_file_picker.pick_files(allow_multiple=False)),
+        ft.ElevatedButton("Select DSpace Import CSV", on_click=lambda _: pick_dspace_file_picker.pick_files(allow_multiple=False, allowed_extensions=["csv"])),
         ft.ElevatedButton("Start Merging", on_click=start_merging),
         progress,
         log,
