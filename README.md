@@ -12,6 +12,7 @@ Combines the CLI versions of
 
 into one flet GUI app
 
+
 todo: 
 
 
@@ -19,6 +20,15 @@ screenshot
 link to demo
 
 documentation: 
+
+
+TESTED with
+
+Python 3.10.12
+Python 3.11.0
+Ubuntu 22.04.5 LTS
+Sonoma 14.4.1
+
 
 REQUIREMENTS
 USAGE
