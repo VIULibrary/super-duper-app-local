@@ -31,5 +31,15 @@ Sonoma 14.4.1
 
 
 REQUIREMENTS
+
+## Installation
+1. [Install Python 3](https://www.python.org/about/gettingstarted/)
+2. [Install Request sand flet library](https://requests.readthedocs.io/en/latest/user/install/)
+
+ - ```pip install flet requests```
+
+
+
+
 USAGE
 ATTRIBUTION
