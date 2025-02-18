@@ -42,4 +42,10 @@ REQUIREMENTS
 
 
 USAGE
+
+run with ```python super-duper-app-local.py```
+
+
 ATTRIBUTION
+
+    converter  

@@ -298,7 +298,8 @@ def page2(page: ft.Page):
         ft.Container(height=15),
     ])
 
-    page.add(
+    scrollable_content = ft.Column(
+        [
         header,
         description,
         spacer,
@@ -310,7 +311,13 @@ def page2(page: ft.Page):
         progress,
         log,
         nav_link
+               ],
+        scroll=True,  # Enable scrolling
+        expand=True,  # Expand to fill available space
     )
+
+    # Add the scrollable content to the page
+    page.add(scrollable_content)
 
 #####################################################
 
