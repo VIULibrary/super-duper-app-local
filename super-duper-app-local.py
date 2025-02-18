@@ -170,16 +170,25 @@ def page2(page: ft.Page):
 
     header = ft.Text("DSpace to Datacite CSV Converter", size=24, weight="bold", color=ft.Colors.PINK_100)
     description = ft.Text(
-        "Convert DSpace metadata export CSV into a Datacite compatible CSV format. Edit & save type mappings as needed",
-        size=14,
-        color=ft.Colors.GREY_600,
+        spans=[
+            ft.TextSpan(
+                "Convert DSpace metadata by pasting your CSV content below. The converter will transform it into Datacite format. ",
+                ft.TextStyle(size=14, color=ft.Colors.GREY_600)
+            ),
+            ft.TextSpan(
+                "See Datacite Resource Types.",
+                ft.TextStyle(color=ft.Colors.BLUE),
+                url="https://support.datacite.org/docs/what-are-the-resource-types-for-datacite-dois"  # Replace with the actual guide link
+            )
+        ]
     )
+    
     spacer = ft.Container(height=10)
 
     dspace_csv = ft.TextField(label="DSpace Export CSV File", disabled=True, width=500)
     datacite_filename = ft.TextField(
         label="Output Filename",
-        label_style=ft.TextStyle(color=ft.Colors.BLUE), 
+        label_style=ft.TextStyle(color=ft.Colors.PINK_100),
         height=40, 
         width=500, 
         hint_text="DataciteImport.csv",
@@ -349,7 +358,7 @@ def page3(page: ft.Page):
     )
     output_filename = ft.TextField(
         label="Output Filename",
-        label_style=ft.TextStyle(color=ft.Colors.BLUE),  # Change label color to blue
+        label_style=ft.TextStyle(color=ft.Colors.PINK_100),
         height=40,
         width=691, 
         hint_text="DataciteExport.csv",
