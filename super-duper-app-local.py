@@ -64,10 +64,15 @@ def reverse_name_order(name):
         return f"{parts[1]} {parts[0]}"
     return name.strip().rstrip(".")
 
+#Map DSpace types =>  Datacite types.
 def map_type(dspace_type, type_mapping):
-    """Map DSpace types to Datacite types."""
-    #default if no mapping is defined
-    return type_mapping.get(dspace_type, "Unknown") 
+    if not dspace_type:
+        return "Unknown" 
+    dspace_type = dspace_type.strip().lower()  # Normalize input
+    for pattern, datacite_type in type_mapping.items():
+        if re.match(pattern, dspace_type, re.IGNORECASE):
+            return datacite_type
+    return "Unknown" 
 
 def process_csv(dspace_csv, datacite_csv, type_mapping, progress, log):
     uri_patterns = ["http://hdl.handle.net/10613", "http://hdl.handle.net/10170"]
@@ -204,16 +209,43 @@ def page2(page: ft.Page):
     progress = ft.ProgressBar(width=500, visible=False)
 
     type_mapping = {
-        "Article": "Text",
-        "Book": "Text",
-        "Thesis": "Text",
-        "Dataset": "Dataset",
-        "Image": "Image",
-        "Video": "Audiovisual",
-        "Audio": "Sound",
+        r"abstract.*": "Text",
+        r"archival.*": "Other",
+        r"article.*": "Text",    
+        r"audio.*": "Sound",
+        r"blog.*": "Text",
+        r"book": "Book",
+        r"book chapter.*": "BookChapter",
+        r"book review.*": "Other",
+        r"brief.*": "Other",
+        r"case.*": "Report",
+        r"chapbook": "Book",
+        r"conference.*": "ConferencePaper",
+        r"data.*": "Dataset",
+        r"guidebook": "Book",
+        r"illustration.*": "Image",
+        r"image.*": "Image",
+        r"interview.*": "Other",
+        r"journal.*": "Journal",
+        r"magazine.*": "JournalArticle",
+        r".*project.*": "Project",
+        r"map": "Other",
+        r"news.*": "Newspaper",
         "Other": "Other",
-        "Illustrator": "Image",
-        "Archival Material":"Text"
+        r"paper.*": "Project",
+        r"play.*": "Other",
+        r"poster*": "Image",
+        r"presentation.*": "Other",
+        r"realia.*": "Other",
+        r".*oral.*": "Sound",
+        r".*report.*": "Report",
+        r"research.*": "Project",
+        r"spoken.*": "Sound",
+        r"template.*": "Other",
+        r"thesis.*": "Dissertation",
+        r"video.*": "Audiovisual",
+        r"web.*": "InteractiveResource",
+        r"working paper.*": "Project"
     }
     type_mapping_display.value = json.dumps(type_mapping, indent=4)
 
