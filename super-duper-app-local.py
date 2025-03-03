@@ -18,7 +18,7 @@ def page1(page: ft.Page):
 
     # Centered title with space from the top
     spacer = ft.Container(height=50)
-    title = ft.Text("Super Duper CSV to DOI to CSV App", size=36, weight="bold", color=ft.Colors.PINK_100)
+    title = ft.Text("Super-Duper-App-Local", size=36, weight="bold", color=ft.Colors.PINK_100)
 
     # Numbered list
     list_items = [
