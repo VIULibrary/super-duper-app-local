@@ -29,7 +29,7 @@ Combines the CLI versions of
 run with ```python super-duper-app-local.py```
 
 
-### TESTED with:###
+### TESTED with:
 
 - Python 3.10.12
 - Python 3.11.0
