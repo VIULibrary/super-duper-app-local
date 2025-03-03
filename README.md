@@ -29,9 +29,9 @@ Combines the CLI versions of
 run with ```python super-duper-app-local.py```
 
 
-* TESTED with: *
+* TESTED with:
 
-Python 3.10.12
-Python 3.11.0
-Sonoma 14.4.1
+- Python 3.10.12
+- Python 3.11.0
+- Sonoma 14.4.1
 
