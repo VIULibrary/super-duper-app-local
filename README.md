@@ -1,9 +1,9 @@
 # Super-Duper-App-Local #
 
 
-1. Transforms Dpsace metadata export csv to Datacite metadata import csv
+1. Transforms Dpsace metadata export csv to Datacite metadata import CSV
 2. Submits records to Datacite for DOI creation
-3. Merges the newly created DOIs back into the Dspace csv for 
+3. Merges the newly created DOIs back into the Dspace CSV
 4. Provides basic statistics for the DOIs generated
 
 
