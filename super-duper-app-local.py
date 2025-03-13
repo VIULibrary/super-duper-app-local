@@ -16,11 +16,10 @@ def page1(page: ft.Page):
     page.title = "Title Page"
 
 
-    # Centered title with space from the top
+    # Centered title . .  .
     spacer = ft.Container(height=50)
     title = ft.Text("Super-Duper-App-Local", size=36, weight="bold", color=ft.Colors.PINK_100)
 
-    # Numbered list
     list_items = [
         "1. DSpace to Datacite CSV Converter",
         "2. Datacite Bulk DOI Creator",
@@ -37,7 +36,7 @@ def page1(page: ft.Page):
         controls=[ft.Text(item, size=14) for item in list_items]
     )
 
-    # Navigation link to Page 2 (lower right)
+    # Nav
     nav_link = ft.Row(
         [
             ft.TextButton("DSPACE TO DATACITE CSV CONVERTER →", on_click=lambda _: navigate_to_page2(page)),
@@ -183,7 +182,7 @@ def page2(page: ft.Page):
             ft.TextSpan(
                 "See Datacite Resource Types.",
                 ft.TextStyle(color=ft.Colors.BLUE),
-                url="https://support.datacite.org/docs/what-are-the-resource-types-for-datacite-dois"  # Replace with the actual guide link
+                url="https://support.datacite.org/docs/what-are-the-resource-types-for-datacite-dois" 
             )
         ]
     )
@@ -285,11 +284,11 @@ def page2(page: ft.Page):
         
         try:
             if page.web:
-                # For web, we'll first save to a temporary file
+                # save to temp file
                 temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.csv')
                 process_csv(dspace_csv.value, temp_file.name, type_mapping, progress, log)
                 
-                # Then trigger the download
+                # download
                 with open(temp_file.name, 'rb') as f:
                     page.client_storage.set('download_data', f.read())
                     page.launch_url(f"/download/{os.path.basename(output_path)}")
@@ -328,9 +327,9 @@ def page2(page: ft.Page):
             "Select DSpace Export CSV",
             on_click=lambda _: pick_dspace_file_picker.pick_files(allow_multiple=False,allowed_extensions=["csv"])
         ),
-        # Add space above Output Filename
+    
         ft.Container(height=10),
-        datacite_filename,  # Move Output Filename above Save Location
+        datacite_filename, 
         output_directory,
         ft.ElevatedButton(
             "Choose Save Location",
@@ -353,11 +352,10 @@ def page2(page: ft.Page):
         log,
         nav_link
                ],
-        scroll=True,  # Enable scrolling
-        expand=True,  # Expand to fill available space
+        scroll=True, 
+        expand=True, 
     )
 
-    # Add the scrollable content to the page
     page.add(scrollable_content)
 
 #####################################################
@@ -403,7 +401,6 @@ def page3(page: ft.Page):
     )
     log_area = ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
 
-    # Progress indicator
     progress = ft.ProgressBar(width=500, visible=False)
 
     # File pickers
@@ -424,7 +421,7 @@ def page3(page: ft.Page):
     
     page.overlay.extend([input_csv_picker, save_location_picker])
 
-    # Credentials file picker
+    # Creds file picker
     def pick_credentials_file(e: FilePickerResultEvent):
         if e.files:
             credentials_file_path = e.files[0].path
@@ -600,7 +597,7 @@ def page3(page: ft.Page):
         progress.visible = False
         progress.update()
 
-    # Navigation link to Page 1 (lower left)
+
     nav_link = ft.Row(
         [
             ft.TextButton("← DSPACE TO DATACITE CSV CONVERTER", on_click=lambda _: navigate_to_page2(page)),
@@ -609,45 +606,51 @@ def page3(page: ft.Page):
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
     )
 
-    # Add components to the page
-    page.add(
-        header,
-        description,
-        spacer,
-        ft.Column(
-            [
-                ft.ElevatedButton("Upload Credentials File", on_click=lambda _: credentials_picker.pick_files(allow_multiple=False, allowed_extensions=["json"])),
-                url_input,
-                doi_prefix_input,
-                username_input,
-                password_input,
-            ],
-            spacing=10,
-        ),
-        ft.Column(
-            [
-                ft.Row([
-                    ft.ElevatedButton("Select Input CSV", on_click=lambda _: input_csv_picker.pick_files(allow_multiple=False, allowed_extensions=["csv"])),
-                    input_csv
-                ]),
-                # Add spacing before output_filename
-                ft.Container(height=15),
-                output_filename,
-                ft.Row([
-                    ft.ElevatedButton(
-                        "Choose Save Location",
-                        on_click=lambda _: save_location_picker.get_directory_path()
-                    ),
-                    output_directory
-                ]),
-            ],
-            spacing=10,
-        ),
-        ft.ElevatedButton("Process and Submit DOIs", on_click=process_and_submit),
-        progress,
-        log_area,
-        nav_link
+    scrollable_content = ft.Column(
+        [
+            header,
+            description,
+            spacer,
+            ft.Column(
+                [
+                    ft.ElevatedButton("Upload Credentials File", on_click=lambda _: credentials_picker.pick_files(allow_multiple=False, allowed_extensions=["json"])),
+                    url_input,
+                    doi_prefix_input,
+                    username_input,
+                    password_input,
+                ],
+                spacing=10,
+            ),
+            ft.Column(
+                [
+                    ft.Row([
+                        ft.ElevatedButton("Select Input CSV", on_click=lambda _: input_csv_picker.pick_files(allow_multiple=False, allowed_extensions=["csv"])),
+                        input_csv
+                    ]),
+                    # space
+                    ft.Container(height=15),
+                    output_filename,
+                    ft.Row([
+                        ft.ElevatedButton(
+                            "Choose Save Location",
+                            on_click=lambda _: save_location_picker.get_directory_path()
+                        ),
+                        output_directory
+                    ]),
+                ],
+                spacing=10,
+            ),
+            ft.ElevatedButton("Process and Submit DOIs", on_click=process_and_submit),
+            ft.Text("   Scroll to view log", size=12, color=ft.Colors.PINK_100),
+            progress,
+            log_area,
+            nav_link
+        ],
+        scroll=True,  
+        expand=True,  
     )
+
+    page.add(scrollable_content)
 
 
 #####################################################
@@ -715,7 +718,7 @@ def page4(page: ft.Page):
                 fieldnames = dspace_reader.fieldnames  # Retain original fieldnames
 
                 for row in dspace_reader:
-                    matched = False  # Track if any field matches the source
+                    matched = False 
                     for uri_field in uri_fields:
                         if uri_field in row and row[uri_field].strip():  # Check if the field exists and has data
                             existing_uri = row[uri_field].strip()
@@ -744,7 +747,7 @@ def page4(page: ft.Page):
             # Write the updated data back to a new CSV file
             from pathlib import Path
 
-            dspace_path = Path(dspace_csv.value.strip())  # Remove extra spaces from the path
+            dspace_path = Path(dspace_csv.value.strip())  
             output_csv = str(dspace_path.parent / f"updated_{dspace_path.name}")
 
             # Write the updated data back to a new CSV file
@@ -772,7 +775,7 @@ def page4(page: ft.Page):
     pick_auto_prefix_file_picker = ft.FilePicker(on_result=pick_auto_prefix_file)
     page.overlay.extend([pick_dspace_file_picker, pick_auto_prefix_file_picker])
 
-    # Navigation link to Page 1 (lower left)
+
     nav_link = ft.Row(
         [
             ft.TextButton("← DATACITE BULK DOI CREATOR", on_click=lambda _: navigate_to_page3(page)),
@@ -898,7 +901,7 @@ def page5(page: ft.Page):
         
         stats_container.update()
 
-    # Navigation link
+
     nav_link = ft.Row(
         [
             ft.TextButton("← CSV MERGER FOR DSPACE IMPORT", on_click=lambda _: navigate_to_page4(page)),
@@ -906,7 +909,7 @@ def page5(page: ft.Page):
         alignment=ft.MainAxisAlignment.START,
     )
 
-    # Add all components to the page first
+   
     page.add(
         header,
         description,
