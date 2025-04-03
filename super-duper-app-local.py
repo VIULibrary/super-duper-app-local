@@ -72,6 +72,20 @@ def map_type(dspace_type, type_mapping):
         if re.match(pattern, dspace_type, re.IGNORECASE):
             return datacite_type
     return "Unknown" 
+def extract_year(date_str):
+    try:
+        # Attempt to parse the date in different formats
+        for fmt in ("%Y", "%d/%m/%Y", "%d-%b", "%Y-%m-%d", "%d-%b-%Y"):
+            try:
+                parsed_date = datetime.strptime(date_str, fmt)
+                return parsed_date.year
+            except ValueError:
+                continue
+        # If no format matches, return "Unknown"
+        return "Unknown"
+    except Exception:
+        return "Unknown"
+
 
 def process_csv(dspace_csv, datacite_csv, type_mapping, progress, log):
     uri_patterns = ["http://hdl.handle.net/10613", "http://hdl.handle.net/10170"]
@@ -97,7 +111,9 @@ def process_csv(dspace_csv, datacite_csv, type_mapping, progress, log):
                 progress.update()
 
                 title = row.get("dc.title[en]", row.get("dc.title", row.get("dc.title[]", ""))).strip()
-                year = row.get("dc.date.issued[]", row.get("dc.date.issued[en]", row.get("dc.date.issued", ""))).strip()
+                #year = row.get("dc.date.issued[]", row.get("dc.date.issued[en]", row.get("dc.date.issued", ""))).strip()
+                year_raw = str(row.get("dc.date.issued[]", row.get("dc.date.issued[en]", row.get("dc.date.issued", "")))).strip()
+                year = str(extract_year(year_raw))
                 type_field = map_type(row.get("dc.type[en]", row.get("dc.type", row.get("dc.type[]", ""))).strip(), type_mapping)
                 description = row.get("dc.description.abstract[en]", row.get("dc.description", row.get("dc.description[]", ""))).strip()
                 publisher = row.get("dc.publisher[en]", "").strip()
