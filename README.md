@@ -10,7 +10,7 @@
 Combines the CLI versions of 
 
 - [csv-merger-1](https://github.com/VIULibrary/csv-merger-1)
-- [Datacite Bulk DOI Generator](https://github.com/VIULibrary/datacite-bulk-doi-creator) 
+- [Datacite Bulk DOI Generator](https://github.com/VIULibrary/datacite-bulk-doi-creator) - forked from [GSU's datacite-bulk-doi-creator](https://github.com/gsu-library/datacite-bulk-doi-creator)
 - [csv-merger-2](https://github.com/VIULibrary/csv-merger-2) 
 
 . . . into one flet GUI app
