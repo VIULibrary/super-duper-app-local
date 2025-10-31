@@ -40,3 +40,7 @@ Combines the CLI versions of
 - Python 3.11.0
 - Sonoma 14.4.1
 
+## COMING SOON ##
+
+- A web version of this app
+- A workflow for Islandora metadata
